@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtre des écoles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 20px;
+        }
+        .filters, .school {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+        .school {
+            border-left: 5px solid #4f46e5;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Filtrer les écoles</h2>
+
+<div class="filters">
+    <label>
+        Région
+        <select id="region">
+            <option value="">-- Choisir --</option>
+            <option value="Wallonie">Wallonie</option>
+            <option value="Flandre">Flandre</option>
+        </select>
+    </label>
+
+    <label>
+        Langue
+        <select id="language">
+            <option value="">-- Choisir --</option>
+            <option value="Français">Français</option>
+            <option value="Anglais">Anglais</option>
+            <option value="Néerlandais">Néerlandais</option>
+        </select>
+    </label>
+
+    <label>
+        Âge minimum
+        <input type="number" id="age" min="0">
+    </label>
+
+    <label>
+        Note minimum
+        <input type="number" id="note" min="0" max="20">
+    </label>
+</div>
+
+<div id="results"></div>
+
+<script>
+const schools = [
+    {
+        name: "Université de Liège",
+        site: "https://www.uliege.be",
+        address: "Liège",
+        region: "Wallonie",
+        openDate: "2025-09-01",
+        registrationDate: "2025-06-01",
+        closeDate: "2026-06-30",
+        minAge: 18,
+        languages: ["Français", "Anglais"],
+        type: "Université",
+        filiere: "Informatique",
+        equivalence: true,
+        note: 14
+    },
+    {
+        name: "KU Leuven",
+        site: "https://www.kuleuven.be",
+        address: "Leuven",
+        region: "Flandre",
+        openDate: "2025-09-15",
+        registrationDate: "2025-05-15",
+        closeDate: "2026-06-30",
+        minAge: 18,
+        languages: ["Anglais", "Néerlandais"],
+        type: "Université",
+        filiere: "Engineering",
+        equivalence: false,
+        note: 16
+    },
+    {
+        name: "Haute École de Namur",
+        site: "",
+        address: "Namur",
+        region: "Wallonie",
+        openDate: "2025-09-01",
+        registrationDate: "2025-06-10",
+        closeDate: "2026-06-30",
+        minAge: 17,
+        languages: ["Français"],
+        type: "Haute école",
+        filiere: "Gestion",
+        equivalence: true,
+        note: 12
+    }
+];
+
+const regionEl = document.getElementById("region");
+const languageEl = document.getElementById("language");
+const ageEl = document.getElementById("age");
+const noteEl = document.getElementById("note");
+const resultsEl = document.getElementById("results");
+
+function filterSchools() {
+    let filtered = [...schools];
+
+    if (regionEl.value) {
+        filtered = filtered.filter(s => s.region === regionEl.value);
+    }
+
+    if (languageEl.value) {
+        filtered = filtered.filter(s => s.languages.includes(languageEl.value));
+    }
+
+    if (ageEl.value) {
+        filtered = filtered.filter(s => s.minAge <= Number(ageEl.value));
+    }
+
+    if (noteEl.value) {
+        filtered = filtered.filter(s => s.note >= Number(noteEl.value));
+    }
+
+    renderSchools(filtered);
+}
+
+function renderSchools(list) {
+    resultsEl.innerHTML = "";
+
+    list.forEach(s => {
+        const div = document.createElement("div");
+        div.className = "school";
+        div.innerHTML = `
+            <strong>${s.name}</strong><br>
+            Région : ${s.region}<br>
+            Langues : ${s.languages.join(", ")}<br>
+            Filière : ${s.filiere}<br>
+            Type : ${s.type}<br>
+            Âge minimum : ${s.minAge}<br>
+            Note : ${s.note}<br>
+            Équivalence : ${s.equivalence ? "Oui" : "Non"}<br>
+            <a href="${s.site}" target="_blank">${s.site}</a>
+        `;
+        resultsEl.appendChild(div);
+    });
+}
+
+regionEl.addEventListener("change", filterSchools);
+languageEl.addEventListener("change", filterSchools);
+ageEl.addEventListener("input", filterSchools);
+noteEl.addEventListener("input", filterSchools);
+
+filterSchools();
+</script>
+
+</body>
+</html>
