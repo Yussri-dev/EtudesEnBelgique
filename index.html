@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filtre des écoles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,15 +14,14 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #f8f9fa;
             min-height: 100vh;
         }
 
         /* Navigation */
         nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -33,104 +33,162 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2rem;
         }
 
         .logo {
             font-size: 1.5rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 700;
+            color: #ff8c42;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #495057;
             font-weight: 500;
             transition: color 0.3s;
-            position: relative;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a i {
+            font-size: 1.1rem;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #ff8c42;
         }
 
         .burger {
             display: none;
             flex-direction: column;
             cursor: pointer;
-            gap: 4px;
+            gap: 5px;
         }
 
         .burger span {
             width: 25px;
             height: 3px;
-            background: #333;
+            background: #495057;
             border-radius: 3px;
             transition: 0.3s;
         }
 
         /* Banner */
         .banner {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
-            color: white;
+            background: white;
+            border-bottom: 3px solid #ff8c42;
             text-align: center;
-            padding: 4rem 2rem;
-            margin-bottom: 2rem;
+            padding: 3.5rem 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .banner-icon {
+            font-size: 4rem;
+            color: #ff8c42;
+            margin-bottom: 1rem;
         }
 
         .banner h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            color: #212529;
+            font-weight: 700;
         }
 
         .banner p {
-            font-size: 1.2rem;
-            opacity: 0.95;
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+
+        /* Stats Section */
+        .stats {
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-card i {
+            font-size: 2.5rem;
+            color: #ff8c42;
+            margin-bottom: 0.8rem;
+        }
+
+        .stat-card h3 {
+            font-size: 2rem;
+            color: #212529;
+            margin-bottom: 0.3rem;
+            font-weight: 700;
+        }
+
+        .stat-card p {
+            color: #6c757d;
+            font-size: 0.9rem;
         }
 
         /* Main Content */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem 2rem;
         }
 
         .filters {
             background: white;
             padding: 2rem;
             margin-bottom: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
         }
 
-        .filters h2 {
+        .filters-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
             margin-bottom: 1.5rem;
-            color: #333;
+        }
+
+        .filters-header i {
+            font-size: 1.5rem;
+            color: #ff8c42;
+        }
+
+        .filters-header h2 {
+            color: #212529;
+            font-size: 1.3rem;
+            font-weight: 600;
         }
 
         .filter-grid {
@@ -139,75 +197,183 @@
             gap: 1.5rem;
         }
 
+        .filter-item {
+            position: relative;
+        }
+
+        .filter-item i {
+            position: absolute;
+            left: 12px;
+            top: 39px;
+            color: #6c757d;
+            font-size: 0.95rem;
+        }
+
         label {
             display: block;
-            color: #555;
+            color: #495057;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
 
         select, input {
             width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
+            padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            background: #f8f9fa;
         }
 
         select:focus, input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #ff8c42;
+            background: white;
         }
 
+        /* Results Header */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .results-count {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .results-count i {
+            color: #ff8c42;
+            font-size: 1.2rem;
+        }
+
+        /* School Cards */
         .school {
             background: white;
-            padding: 1.5rem;
+            padding: 1.8rem;
             margin-bottom: 1.5rem;
-            border-radius: 12px;
-            border-left: 5px solid #667eea;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #ff8c42;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .school:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .school-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.2rem;
+        }
+
+        .school-title {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .school-title i {
+            font-size: 1.8rem;
+            color: #ff8c42;
         }
 
         .school strong {
             font-size: 1.3rem;
-            color: #667eea;
-            display: block;
-            margin-bottom: 1rem;
+            color: #212529;
+            font-weight: 700;
+        }
+
+        .school-badge {
+            background: #fff3e0;
+            color: #ff8c42;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
         }
 
         .school-info {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 0.5rem;
-            margin: 1rem 0;
-            color: #555;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1.2rem 0;
+            padding: 1.2rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+
+        .info-item i {
+            color: #ff8c42;
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .school-footer {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e9ecef;
         }
 
         .school a {
-            color: #667eea;
+            color: white;
+            background: #ff8c42;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: 500;
-            display: inline-block;
-            margin-top: 0.5rem;
-            transition: color 0.3s;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s;
+            font-size: 0.95rem;
         }
 
         .school a:hover {
-            color: #764ba2;
+            background: #e67a32;
         }
 
         .no-results {
             text-align: center;
-            padding: 3rem;
-            color: white;
-            font-size: 1.2rem;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: #dee2e6;
+            margin-bottom: 1rem;
+        }
+
+        .no-results p {
+            color: #6c757d;
+            font-size: 1.1rem;
         }
 
         /* Mobile */
@@ -221,7 +387,7 @@
                 width: 100%;
                 text-align: center;
                 transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 padding: 2rem 0;
             }
 
@@ -246,11 +412,15 @@
             }
 
             .banner h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .banner p {
                 font-size: 1rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
             }
 
             .filter-grid {
@@ -260,6 +430,25 @@
             .school-info {
                 grid-template-columns: 1fr;
             }
+
+            .school-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem 1rem;
+            }
+
+            .stats {
+                padding: 0 1rem;
+            }
+
+            .results-header {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -267,12 +456,15 @@
 
 <nav>
     <div class="nav-container">
-        <div class="logo">🎓 EduFind</div>
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            EduFind
+        </div>
         <ul class="nav-links">
-            <li><a href="#accueil">Accueil</a></li>
-            <li><a href="#recherche">Recherche</a></li>
-            <li><a href="#ecoles">Écoles</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
+            <li><a href="#recherche"><i class="fas fa-search"></i> Recherche</a></li>
+            <li><a href="#ecoles"><i class="fas fa-school"></i> Écoles</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
         <div class="burger">
             <span></span>
@@ -283,42 +475,82 @@
 </nav>
 
 <div class="banner">
+    <div class="banner-icon">
+        <i class="fas fa-university"></i>
+    </div>
     <h1>Trouvez votre école idéale</h1>
     <p>Filtrez parmi les meilleures institutions d'enseignement en Belgique</p>
 </div>
 
+<div class="stats">
+    <div class="stat-card">
+        <i class="fas fa-school"></i>
+        <h3 id="totalSchools">3</h3>
+        <p>Écoles disponibles</p>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-map-marked-alt"></i>
+        <h3>2</h3>
+        <p>Régions</p>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-language"></i>
+        <h3>3</h3>
+        <p>Langues</p>
+    </div>
+    <div class="stat-card">
+        <i class="fas fa-book-open"></i>
+        <h3>15+</h3>
+        <p>Filières</p>
+    </div>
+</div>
+
 <div class="container">
     <div class="filters">
-        <h2>🔍 Filtres de recherche</h2>
+        <div class="filters-header">
+            <i class="fas fa-filter"></i>
+            <h2>Filtres de recherche</h2>
+        </div>
         <div class="filter-grid">
-            <div>
+            <div class="filter-item">
                 <label for="region">Région</label>
+                <i class="fas fa-map-marker-alt"></i>
                 <select id="region">
-                    <option value="">-- Toutes les régions --</option>
+                    <option value="">Toutes les régions</option>
                     <option value="Wallonie">Wallonie</option>
                     <option value="Flandre">Flandre</option>
                 </select>
             </div>
 
-            <div>
+            <div class="filter-item">
                 <label for="language">Langue</label>
+                <i class="fas fa-language"></i>
                 <select id="language">
-                    <option value="">-- Toutes les langues --</option>
+                    <option value="">Toutes les langues</option>
                     <option value="Français">Français</option>
                     <option value="Anglais">Anglais</option>
                     <option value="Néerlandais">Néerlandais</option>
                 </select>
             </div>
 
-            <div>
+            <div class="filter-item">
                 <label for="age">Âge minimum</label>
+                <i class="fas fa-user"></i>
                 <input type="number" id="age" min="0" placeholder="Ex: 18">
             </div>
 
-            <div>
+            <div class="filter-item">
                 <label for="note">Note minimum</label>
+                <i class="fas fa-star"></i>
                 <input type="number" id="note" min="0" max="20" placeholder="Ex: 12">
             </div>
+        </div>
+    </div>
+
+    <div class="results-header">
+        <div class="results-count">
+            <i class="fas fa-list"></i>
+            <span id="resultsCount">3 écoles trouvées</span>
         </div>
     </div>
 
@@ -379,6 +611,7 @@ const languageEl = document.getElementById("language");
 const ageEl = document.getElementById("age");
 const noteEl = document.getElementById("note");
 const resultsEl = document.getElementById("results");
+const resultsCountEl = document.getElementById("resultsCount");
 const burger = document.querySelector(".burger");
 const navLinks = document.querySelector(".nav-links");
 
@@ -419,9 +652,17 @@ function filterSchools() {
 
 function renderSchools(list) {
     resultsEl.innerHTML = "";
+    
+    // Update results count
+    resultsCountEl.textContent = `${list.length} école${list.length > 1 ? 's' : ''} trouvée${list.length > 1 ? 's' : ''}`;
 
     if (list.length === 0) {
-        resultsEl.innerHTML = '<div class="no-results">Aucune école ne correspond à vos critères 😔</div>';
+        resultsEl.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <p>Aucune école ne correspond à vos critères</p>
+            </div>
+        `;
         return;
     }
 
@@ -429,17 +670,42 @@ function renderSchools(list) {
         const div = document.createElement("div");
         div.className = "school";
         div.innerHTML = `
-            <strong>${s.name}</strong>
-            <div class="school-info">
-                <div>📍 <strong>Région:</strong> ${s.region}</div>
-                <div>🗣️ <strong>Langues:</strong> ${s.languages.join(", ")}</div>
-                <div>📚 <strong>Filière:</strong> ${s.filiere}</div>
-                <div>🏫 <strong>Type:</strong> ${s.type}</div>
-                <div>👤 <strong>Âge min:</strong> ${s.minAge} ans</div>
-                <div>⭐ <strong>Note:</strong> ${s.note}/20</div>
-                <div>✅ <strong>Équivalence:</strong> ${s.equivalence ? "Oui" : "Non"}</div>
+            <div class="school-header">
+                <div class="school-title">
+                    <i class="fas fa-university"></i>
+                    <strong>${s.name}</strong>
+                </div>
+                <div class="school-badge">${s.type}</div>
             </div>
-            ${s.site ? `<a href="${s.site}" target="_blank">🌐 Visiter le site →</a>` : ''}
+            <div class="school-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span><strong>Région:</strong> ${s.region}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-language"></i>
+                    <span><strong>Langues:</strong> ${s.languages.join(", ")}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-book"></i>
+                    <span><strong>Filière:</strong> ${s.filiere}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-user-clock"></i>
+                    <span><strong>Âge min:</strong> ${s.minAge} ans</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-star"></i>
+                    <span><strong>Note:</strong> ${s.note}/20</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-${s.equivalence ? 'check-circle' : 'times-circle'}"></i>
+                    <span><strong>Équivalence:</strong> ${s.equivalence ? "Oui" : "Non"}</span>
+                </div>
+            </div>
+            <div class="school-footer">
+                ${s.site ? `<a href="${s.site}" target="_blank"><i class="fas fa-external-link-alt"></i> Visiter le site</a>` : ''}
+            </div>
         `;
         resultsEl.appendChild(div);
     });
@@ -454,4 +720,4 @@ filterSchools();
 </script>
 
 </body>
-</html>
+                    </html>
