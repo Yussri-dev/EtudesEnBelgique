@@ -1,683 +1,574 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filtre des écoles</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-            min-height: 100vh;
-        }
-
-        /* Navigation */
-        nav {
-            background: white;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ff8c42;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo i {
-            font-size: 1.8rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #495057;
-            font-weight: 500;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links a i {
-            font-size: 1.1rem;
-        }
-
-        .nav-links a:hover {
-            color: #ff8c42;
-        }
-
-        .burger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .burger span {
-            width: 25px;
-            height: 3px;
-            background: #495057;
-            border-radius: 3px;
-            transition: 0.3s;
-        }
-
-        /* Banner */
-        .banner {
-            background: white;
-            border-bottom: 3px solid #ff8c42;
-            text-align: center;
-            padding: 3.5rem 2rem;
-            margin-bottom: 2.5rem;
-        }
-
-        .banner-icon {
-            font-size: 4rem;
-            color: #ff8c42;
-            margin-bottom: 1rem;
-        }
-
-        .banner h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-            color: #212529;
-            font-weight: 700;
-        }
-
-        .banner p {
-            font-size: 1.1rem;
-            color: #6c757d;
-        }
-
-        /* Stats Section */
-        .stats {
-            max-width: 1200px;
-            margin: 0 auto 2rem;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .stat-card i {
-            font-size: 2.5rem;
-            color: #ff8c42;
-            margin-bottom: 0.8rem;
-        }
-
-        .stat-card h3 {
-            font-size: 2rem;
-            color: #212529;
-            margin-bottom: 0.3rem;
-            font-weight: 700;
-        }
-
-        .stat-card p {
-            color: #6c757d;
-            font-size: 0.9rem;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem 2rem;
-        }
-
-        .filters {
-            background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .filters-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .filters-header i {
-            font-size: 1.5rem;
-            color: #ff8c42;
-        }
-
-        .filters-header h2 {
-            color: #212529;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .filter-item {
-            position: relative;
-        }
-
-        .filter-item i {
-            position: absolute;
-            left: 12px;
-            top: 39px;
-            color: #6c757d;
-            font-size: 0.95rem;
-        }
-
-        label {
-            display: block;
-            color: #495057;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        select, input {
-            width: 100%;
-            padding: 0.75rem 0.75rem 0.75rem 2.5rem;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            background: #f8f9fa;
-        }
-
-        select:focus, input:focus {
-            outline: none;
-            border-color: #ff8c42;
-            background: white;
-        }
-
-        /* Results Header */
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .results-count {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #495057;
-            font-weight: 600;
-        }
-
-        .results-count i {
-            color: #ff8c42;
-            font-size: 1.2rem;
-        }
-
-        /* School Cards */
-        .school {
-            background: white;
-            padding: 1.8rem;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-            border-left: 4px solid #ff8c42;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .school:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        .school-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1.2rem;
-        }
-
-        .school-title {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .school-title i {
-            font-size: 1.8rem;
-            color: #ff8c42;
-        }
-
-        .school strong {
-            font-size: 1.3rem;
-            color: #212529;
-            font-weight: 700;
-        }
-
-        .school-badge {
-            background: #fff3e0;
-            color: #ff8c42;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .school-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            margin: 1.2rem 0;
-            padding: 1.2rem;
-            background: #f8f9fa;
-            border-radius: 6px;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            color: #495057;
-            font-size: 0.95rem;
-        }
-
-        .info-item i {
-            color: #ff8c42;
-            font-size: 1.1rem;
-            width: 20px;
-        }
-
-        .school-footer {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.2rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid #e9ecef;
-        }
-
-        .school a {
-            color: white;
-            background: #ff8c42;
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: background 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .school a:hover {
-            background: #e67a32;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: white;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-
-        .no-results i {
-            font-size: 4rem;
-            color: #dee2e6;
-            margin-bottom: 1rem;
-        }
-
-        .no-results p {
-            color: #6c757d;
-            font-size: 1.1rem;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                right: -100%;
-                top: 70px;
-                flex-direction: column;
-                background: white;
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                padding: 2rem 0;
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .burger {
-                display: flex;
-            }
-
-            .burger.active span:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-
-            .burger.active span:nth-child(2) {
-                opacity: 0;
-            }
-
-            .burger.active span:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-
-            .banner h1 {
-                font-size: 1.8rem;
-            }
-
-            .banner p {
-                font-size: 1rem;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .filter-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .school-info {
-                grid-template-columns: 1fr;
-            }
-
-            .school-header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .container {
-                padding: 0 1rem 1rem;
-            }
-
-            .stats {
-                padding: 0 1rem;
-            }
-
-            .results-header {
-                flex-direction: column;
-                gap: 0.5rem;
-                text-align: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="Styles/style.css">
 </head>
+
 <body>
 
-<nav>
-    <div class="nav-container">
-        <div class="logo">
-            <i class="fas fa-graduation-cap"></i>
-            EduFind
-        </div>
-        <ul class="nav-links">
-            <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
-            <li><a href="#recherche"><i class="fas fa-search"></i> Recherche</a></li>
-            <li><a href="#ecoles"><i class="fas fa-school"></i> Écoles</a></li>
-            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
-        </ul>
-        <div class="burger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-</nav>
-
-<div class="banner">
-    <div class="banner-icon">
-        <i class="fas fa-university"></i>
-    </div>
-    <h1>Trouvez votre école idéale</h1>
-    <p>Filtrez parmi les meilleures institutions d'enseignement en Belgique</p>
-</div>
-
-<div class="stats">
-    <div class="stat-card">
-        <i class="fas fa-school"></i>
-        <h3 id="totalSchools">3</h3>
-        <p>Écoles disponibles</p>
-    </div>
-    <div class="stat-card">
-        <i class="fas fa-map-marked-alt"></i>
-        <h3>2</h3>
-        <p>Régions</p>
-    </div>
-    <div class="stat-card">
-        <i class="fas fa-language"></i>
-        <h3>3</h3>
-        <p>Langues</p>
-    </div>
-    <div class="stat-card">
-        <i class="fas fa-book-open"></i>
-        <h3>15+</h3>
-        <p>Filières</p>
-    </div>
-</div>
-
-<div class="container">
-    <div class="filters">
-        <div class="filters-header">
-            <i class="fas fa-filter"></i>
-            <h2>Filtres de recherche</h2>
-        </div>
-        <div class="filter-grid">
-            <div class="filter-item">
-                <label for="region">Région</label>
-                <i class="fas fa-map-marker-alt"></i>
-                <select id="region">
-                    <option value="">Toutes les régions</option>
-                    <option value="Wallonie">Wallonie</option>
-                    <option value="Flandre">Flandre</option>
-                </select>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                EduFind
             </div>
-
-            <div class="filter-item">
-                <label for="language">Langue</label>
-                <i class="fas fa-language"></i>
-                <select id="language">
-                    <option value="">Toutes les langues</option>
-                    <option value="Français">Français</option>
-                    <option value="Anglais">Anglais</option>
-                    <option value="Néerlandais">Néerlandais</option>
-                </select>
-            </div>
-
-            <div class="filter-item">
-                <label for="age">Âge minimum</label>
-                <i class="fas fa-user"></i>
-                <input type="number" id="age" min="0" placeholder="Ex: 18">
-            </div>
-
-            <div class="filter-item">
-                <label for="note">Note minimum</label>
-                <i class="fas fa-star"></i>
-                <input type="number" id="note" min="0" max="20" placeholder="Ex: 12">
+            <ul class="nav-links">
+                <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="#recherche"><i class="fas fa-search"></i> Recherche</a></li>
+                <li><a href="#ecoles"><i class="fas fa-school"></i> Écoles</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
+    </nav>
+
+    <div class="banner">
+        <div class="banner-icon">
+            <i class="fas fa-university"></i>
+        </div>
+        <h1>Trouvez votre école idéale</h1>
+        <p>Filtrez parmi les meilleures institutions d'enseignement en Belgique</p>
     </div>
 
-    <div class="results-header">
-        <div class="results-count">
-            <i class="fas fa-list"></i>
-            <span id="resultsCount">3 écoles trouvées</span>
+    <div class="stats">
+        <div class="stat-card">
+            <i class="fas fa-school"></i>
+            <h3 id="totalSchools">3</h3>
+            <p>Écoles disponibles</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-map-marked-alt"></i>
+            <h3 id="totalRegions">2</h3>
+            <p>Régions</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-language"></i>
+            <h3 id="totalLanguages">3</h3>
+            <p>Langues</p>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-book-open"></i>
+            <h3 id="totalFilieres">0</h3>
+            <p>Filières</p>
         </div>
     </div>
 
-    <div id="results"></div>
-</div>
+    <div class="container">
+        <div class="filters">
+            <div class="filters-header">
+                <i class="fas fa-filter"></i>
+                <h2>Filtres de recherche</h2>
+            </div>
+            <div class="filter-grid">
+                <div class="filter-item">
+                    <label for="private"><i class="fas fa-building"></i> Privé/public</label>
+                    <select id="private">
+                        <option value="">Tous les types</option>
+                        <option value="public">Public</option>
+                        <option value="private">Privé</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="typeSchool"><i class="fas fa-university"></i> Univ/Haute école</label>
+                    <select id="typeSchool">
+                        <option value="">Tous les types</option>
+                        <option value="Université">Université</option>
+                        <option value="Haute école">Haute école</option>
+                        <option value="Promotion sociale">Promotion sociale</option>
+                    </select>
+                </div>
+                <div class="filter-item">
+                    <label for="region"><i class="fas fa-map-marker-alt"></i> Région</label>
+                    <select id="region">
+                        <option value="">Toutes les régions</option>
+                        <option value="Wallonie">Wallonie</option>
+                        <option value="Bruxelles">Bruxelles</option>
+                        <option value="Flandre">Flandre</option>
+                    </select>
+                </div>
 
-<script>
-const schools = [
-    {
-        name: "Université de Liège",
-        site: "https://www.uliege.be",
-        address: "Liège",
-        region: "Wallonie",
-        openDate: "2025-09-01",
-        registrationDate: "2025-06-01",
-        closeDate: "2026-06-30",
-        minAge: 18,
-        languages: ["Français", "Anglais"],
-        type: "Université",
-        filiere: "Informatique",
-        equivalence: true,
-        note: 14
-    },
-    {
-        name: "KU Leuven",
-        site: "https://www.kuleuven.be",
-        address: "Leuven",
-        region: "Flandre",
-        openDate: "2025-09-15",
-        registrationDate: "2025-05-15",
-        closeDate: "2026-06-30",
-        minAge: 18,
-        languages: ["Anglais", "Néerlandais"],
-        type: "Université",
-        filiere: "Engineering",
-        equivalence: false,
-        note: 16
-    },
-    {
-        name: "Haute École de Namur",
-        site: "https://www.henallux.be",
-        address: "Namur",
-        region: "Wallonie",
-        openDate: "2025-09-01",
-        registrationDate: "2025-06-10",
-        closeDate: "2026-06-30",
-        minAge: 17,
-        languages: ["Français"],
-        type: "Haute école",
-        filiere: "Gestion",
-        equivalence: true,
-        note: 12
-    }
-];
+                <div class="filter-item">
+                    <label for="language"><i class="fas fa-language"></i> Langue</label>
+                    <select id="language">
+                        <option value="">Toutes les langues</option>
+                        <option value="Français">Français</option>
+                        <option value="Anglais">Anglais</option>
+                        <option value="Néerlandais">Néerlandais</option>
+                    </select>
+                </div>
 
-const regionEl = document.getElementById("region");
-const languageEl = document.getElementById("language");
-const ageEl = document.getElementById("age");
-const noteEl = document.getElementById("note");
-const resultsEl = document.getElementById("results");
-const resultsCountEl = document.getElementById("resultsCount");
-const burger = document.querySelector(".burger");
-const navLinks = document.querySelector(".nav-links");
+                <div class="filter-item">
+                    <label for="age"><i class="fas fa-user"></i> Âge minimum</label>
+                    <input type="number" id="age" min="0" placeholder="Ex: 18">
+                </div>
 
-// Mobile menu
-burger.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-    burger.classList.toggle("active");
-});
+                <div class="filter-item">
+                    <label for="note"><i class="fas fa-star"></i> Note minimum</label>
+                    <input type="number" id="note" min="0" max="20" placeholder="Ex: 12">
+                </div>
+            </div>
+        </div>
 
-navLinks.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-        navLinks.classList.remove("active");
-        burger.classList.remove("active");
-    });
-});
+        <div class="results-header">
+            <div class="results-count">
+                <i class="fas fa-list"></i>
+                <span id="resultsCount">3 écoles trouvées</span>
+            </div>
+        </div>
 
-function filterSchools() {
-    let filtered = [...schools];
+        <div id="results"></div>
+    </div>
 
-    if (regionEl.value) {
-        filtered = filtered.filter(s => s.region === regionEl.value);
-    }
+    <script>
 
-    if (languageEl.value) {
-        filtered = filtered.filter(s => s.languages.includes(languageEl.value));
-    }
+        const schools = [
 
-    if (ageEl.value) {
-        filtered = filtered.filter(s => s.minAge <= Number(ageEl.value));
-    }
+            /* ===================== */
+            /* ===== WALLONIE ====== */
+            /* ===================== */
 
-    if (noteEl.value) {
-        filtered = filtered.filter(s => s.note >= Number(noteEl.value));
-    }
+            /* Universités */
+            {
+                private: "public",
+                name: "Université catholique de Louvain (UCLouvain)",
+                site: "https://www.uclouvain.be",
+                address: "Louvain-la-Neuve",
+                region: "Wallonie",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-01",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français", "Anglais"],
+                typeSchool: "Université",
+                filieres: ["Informatique", "Sciences", "Médecine", "Droit", "Économie"],
+                equivalence: true,
+                note: 14
+            },
+            {
+                private: "public",
+                name: "Université de Liège",
+                site: "https://www.uliege.be",
+                address: "Liège",
+                region: "Wallonie",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-01",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français", "Anglais"],
+                typeSchool: "Université",
+                filieres: ["Informatique", "Sciences", "Médecine", "Ingénierie"],
+                equivalence: true,
+                note: 14
+            },
+            {
+                private: "public",
+                name: "Université de Mons (UMONS)",
+                site: "https://www.umons.ac.be",
+                address: "Mons",
+                region: "Wallonie",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-01",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français"],
+                typeSchool: "Université",
+                filieres: ["Informatique", "Sciences", "Gestion"],
+                equivalence: true,
+                note: 13
+            },
+            {
+                private: "public",
+                name: "Université de Namur (UNamur)",
+                site: "https://www.unamur.be",
+                address: "Namur",
+                region: "Wallonie",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-01",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français"],
+                typeSchool: "Université",
+                filieres: ["Informatique", "Sciences", "Droit"],
+                equivalence: true,
+                note: 13
+            },
 
-    renderSchools(filtered);
-}
+            /* Hautes écoles */
+            {
+                private: "public",
+                name: "Hénallux – Haute École Namur-Liège-Luxembourg",
+                site: "https://www.henallux.be",
+                address: "Namur",
+                region: "Wallonie",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-10",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français"],
+                typeSchool: "Haute école",
+                filieres: ["Informatique", "Gestion", "Marketing"],
+                equivalence: true,
+                note: 12
+            },
+            {
+                private: "public",
+                name: "Haute École de la Province de Liège (HEPL)",
+                site: "https://www.hepl.be",
+                address: "Liège",
+                region: "Wallonie",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-10",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français"],
+                typeSchool: "Haute école",
+                filieres: ["Informatique", "Électronique", "Gestion"],
+                equivalence: true,
+                note: 12
+            },
+            {
+                private: "public",
+                name: "Haute École Condorcet",
+                site: "https://www.condorcet.be",
+                address: "Mons",
+                region: "Wallonie",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-10",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français"],
+                typeSchool: "Haute école",
+                filieres: ["Informatique", "Gestion", "Soins infirmiers"],
+                equivalence: true,
+                note: 12
+            },
 
-function renderSchools(list) {
-    resultsEl.innerHTML = "";
-    
-    // Update results count
-    resultsCountEl.textContent = `${list.length} école${list.length > 1 ? 's' : ''} trouvée${list.length > 1 ? 's' : ''}`;
+            /* Promotion sociale */
+            {
+                private: "public",
+                name: "EAFC – Enseignement pour Adultes",
+                site: "https://www.eafc.be",
+                address: "Wallonie",
+                region: "Wallonie",
+                openDate: "2025-09-01",
+                registrationDate: "2025-08-15",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français"],
+                typeSchool: "Promotion sociale",
+                filieres: ["Informatique", "Comptabilité", "Secrétariat"],
+                equivalence: false,
+                note: 10
+            },
 
-    if (list.length === 0) {
-        resultsEl.innerHTML = `
+            /* ===================== */
+            /* ===== BRUXELLES ===== */
+            /* ===================== */
+
+            /* Universités */
+            {
+                private: "public",
+                name: "Université libre de Bruxelles (ULB)",
+                site: "https://www.ulb.be",
+                address: "Bruxelles",
+                region: "Bruxelles",
+                openDate: "2025-09-15",
+                registrationDate: "2025-06-01",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français", "Anglais"],
+                typeSchool: "Université",
+                filieres: ["Informatique", "Sciences", "Médecine", "Économie"],
+                equivalence: true,
+                note: 14
+            },
+            {
+                private: "public",
+                name: "Vrije Universiteit Brussel (VUB)",
+                site: "https://www.vub.be",
+                address: "Bruxelles",
+                region: "Bruxelles",
+                openDate: "2025-09-15",
+                registrationDate: "2025-05-15",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Néerlandais", "Anglais"],
+                typeSchool: "Université",
+                filieres: ["Informatica", "Engineering", "Business"],
+                equivalence: true,
+                note: 13
+            },
+
+            /* Hautes écoles */
+            {
+                private: "public",
+                name: "Haute École Léonard de Vinci",
+                site: "https://www.vinci.be",
+                address: "Bruxelles",
+                region: "Bruxelles",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-10",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français"],
+                typeSchool: "Haute école",
+                filieres: ["Informatique", "Réseaux", "Business"],
+                equivalence: true,
+                note: 12
+            },
+            {
+                private: "public",
+                name: "HE2B – Haute École Bruxelles-Brabant",
+                site: "https://www.he2b.be",
+                address: "Bruxelles",
+                region: "Bruxelles",
+                openDate: "2025-09-01",
+                registrationDate: "2025-06-10",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Français"],
+                typeSchool: "Haute école",
+                filieres: ["Informatique", "Éducation", "Paramédical"],
+                equivalence: true,
+                note: 12
+            },
+
+            /* ===================== */
+            /* ===== FLANDRE ======= */
+            /* ===================== */
+
+            /* Universités */
+            {
+                private: "public",
+                name: "KU Leuven",
+                site: "https://www.kuleuven.be",
+                address: "Leuven",
+                region: "Flandre",
+                openDate: "2025-09-15",
+                registrationDate: "2025-05-15",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Néerlandais", "Anglais"],
+                typeSchool: "Université",
+                filieres: ["Engineering", "Sciences", "Business", "Computer Science"],
+                equivalence: true,
+                note: 14
+            },
+            {
+                private: "public",
+                name: "Universiteit Gent (UGent)",
+                site: "https://www.ugent.be",
+                address: "Gent",
+                region: "Flandre",
+                openDate: "2025-09-15",
+                registrationDate: "2025-05-15",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Néerlandais", "Anglais"],
+                typeSchool: "Université",
+                filieres: ["Engineering", "Informatica", "Sciences"],
+                equivalence: true,
+                note: 14
+            },
+            {
+                private: "public",
+                name: "Universiteit Antwerpen",
+                site: "https://www.uantwerpen.be",
+                address: "Antwerpen",
+                region: "Flandre",
+                openDate: "2025-09-15",
+                registrationDate: "2025-05-15",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Néerlandais", "Anglais"],
+                typeSchool: "Université",
+                filieres: ["Business", "Informatica", "Sciences"],
+                equivalence: true,
+                note: 13
+            },
+            {
+                private: "public",
+                name: "Hasselt University (UHasselt)",
+                site: "https://www.uhasselt.be",
+                address: "Hasselt",
+                region: "Flandre",
+                openDate: "2025-09-15",
+                registrationDate: "2025-05-15",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Néerlandais", "Anglais"],
+                typeSchool: "Université",
+                filieres: ["Informatica", "Engineering", "Business"],
+                equivalence: true,
+                note: 13
+            },
+
+            /* Hautes écoles */
+            {
+                private: "public",
+                name: "Thomas More Hogeschool",
+                site: "https://www.thomasmore.be",
+                address: "Mechelen",
+                region: "Flandre",
+                openDate: "2025-09-15",
+                registrationDate: "2025-05-15",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Néerlandais"],
+                typeSchool: "Haute école",
+                filieres: ["Informatica", "Business", "Multimedia"],
+                equivalence: true,
+                note: 11
+            },
+            {
+                private: "public",
+                name: "Arteveldehogeschool",
+                site: "https://www.arteveldehogeschool.be",
+                address: "Gent",
+                region: "Flandre",
+                openDate: "2025-09-15",
+                registrationDate: "2025-05-15",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Néerlandais"],
+                typeSchool: "Haute école",
+                filieres: ["Informatica", "Communicatie", "Design"],
+                equivalence: true,
+                note: 11
+            },
+
+            /* Promotion sociale */
+            {
+                private: "public",
+                name: "CVO – Centrum voor Volwassenenonderwijs",
+                site: "https://www.vlaanderen.be/cvo",
+                address: "Flandre",
+                region: "Flandre",
+                openDate: "2025-09-01",
+                registrationDate: "2025-08-01",
+                closeDate: "2026-06-30",
+                minAge: 18,
+                languages: ["Néerlandais"],
+                typeSchool: "Promotion sociale",
+                filieres: ["Informatica", "Administratie", "Techniek"],
+                equivalence: false,
+                note: 10
+            }
+
+        ];
+
+        // Calculate statistics
+        const totalSchools = schools.length;
+        const uniqueRegions = [...new Set(schools.map(s => s.region))].length;
+        const uniqueLanguages = [...new Set(schools.flatMap(s => s.languages))].length;
+        const uniqueFilieres = [...new Set(schools.flatMap(s => s.filieres))].length;
+
+        // Update stats in DOM
+        document.getElementById('totalSchools').textContent = totalSchools;
+        document.getElementById('totalRegions').textContent = uniqueRegions;
+        document.getElementById('totalLanguages').textContent = uniqueLanguages;
+        document.getElementById('totalFilieres').textContent = uniqueFilieres;
+
+        const typeSchoolEl = document.getElementById("typeSchool");
+        const privateEl = document.getElementById("private")
+        const regionEl = document.getElementById("region");
+        const languageEl = document.getElementById("language");
+        const ageEl = document.getElementById("age");
+        const noteEl = document.getElementById("note");
+        const resultsEl = document.getElementById("results");
+        const resultsCountEl = document.getElementById("resultsCount");
+        const burger = document.querySelector(".burger");
+        const navLinks = document.querySelector(".nav-links");
+
+        // Mobile menu
+        burger.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            burger.classList.toggle("active");
+        });
+
+        navLinks.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                burger.classList.remove("active");
+            });
+        });
+
+        function filterSchools() {
+            let filtered = [...schools];
+
+            if (typeSchoolEl.value) {
+                filtered = filtered.filter(s => s.typeSchool === typeSchoolEl.value);
+            }
+            if (privateEl.value) {
+                filtered = filtered.filter(s => s.private === privateEl.value);
+            }
+
+            if (regionEl.value) {
+                filtered = filtered.filter(s => s.region === regionEl.value);
+            }
+
+            if (languageEl.value) {
+                filtered = filtered.filter(s => s.languages.includes(languageEl.value));
+            }
+
+            if (ageEl.value) {
+                filtered = filtered.filter(s => s.minAge <= Number(ageEl.value));
+            }
+
+            if (noteEl.value) {
+                filtered = filtered.filter(s => {
+                    // Si l'école est en Flandre, la note n'est pas obligatoire
+                    if (s.region === "Flandre" && s.note === null) {
+                        return true;
+                    }
+                    return s.note >= Number(noteEl.value);
+                });
+            }
+
+            renderSchools(filtered);
+        }
+
+        function renderSchools(list) {
+            resultsEl.innerHTML = "";
+
+            // Update results count
+            resultsCountEl.textContent = `${list.length} école${list.length > 1 ? 's' : ''} trouvée${list.length > 1 ? 's' : ''}`;
+
+            if (list.length === 0) {
+                resultsEl.innerHTML = `
             <div class="no-results">
                 <i class="fas fa-search"></i>
                 <p>Aucune école ne correspond à vos critères</p>
             </div>
         `;
-        return;
-    }
+                return;
+            }
 
-    list.forEach(s => {
-        const div = document.createElement("div");
-        div.className = "school";
-        div.innerHTML = `
+            list.forEach(s => {
+                const div = document.createElement("div");
+                div.className = "school";
+                div.innerHTML = `
             <div class="school-header">
                 <div class="school-title">
                     <i class="fas fa-university"></i>
                     <strong>${s.name}</strong>
                 </div>
-                <div class="school-badge">${s.type}</div>
+                <div class="school-badge">${s.typeSchool}</div>
             </div>
             <div class="school-info">
+                <div class="info-item">
+                    <i class="fas fa-building"></i>
+                    <span><strong>Public/privé:</strong> ${s.private === 'public' ? 'Public' : 'Privé'}</span>
+                </div>
                 <div class="info-item">
                     <i class="fas fa-map-marker-alt"></i>
                     <span><strong>Région:</strong> ${s.region}</span>
@@ -688,7 +579,7 @@ function renderSchools(list) {
                 </div>
                 <div class="info-item">
                     <i class="fas fa-book"></i>
-                    <span><strong>Filière:</strong> ${s.filiere}</span>
+                    <span><strong>Filières:</strong> ${s.filieres.join(", ")}</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-user-clock"></i>
@@ -696,7 +587,7 @@ function renderSchools(list) {
                 </div>
                 <div class="info-item">
                     <i class="fas fa-star"></i>
-                    <span><strong>Note:</strong> ${s.note}/20</span>
+                    <span><strong>Note:</strong> ${s.note !== null ? s.note + '/20' : 'Non requise'}</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-${s.equivalence ? 'check-circle' : 'times-circle'}"></i>
@@ -707,17 +598,20 @@ function renderSchools(list) {
                 ${s.site ? `<a href="${s.site}" target="_blank"><i class="fas fa-external-link-alt"></i> Visiter le site</a>` : ''}
             </div>
         `;
-        resultsEl.appendChild(div);
-    });
-}
+                resultsEl.appendChild(div);
+            });
+        }
 
-regionEl.addEventListener("change", filterSchools);
-languageEl.addEventListener("change", filterSchools);
-ageEl.addEventListener("input", filterSchools);
-noteEl.addEventListener("input", filterSchools);
+        privateEl.addEventListener("change", filterSchools);
+        typeSchoolEl.addEventListener("change", filterSchools);
+        regionEl.addEventListener("change", filterSchools);
+        languageEl.addEventListener("input", filterSchools);
+        ageEl.addEventListener("input", filterSchools);
+        noteEl.addEventListener("input", filterSchools);
 
-filterSchools();
-</script>
+        filterSchools();
+    </script>
 
 </body>
-                    </html>
+
+</html>
