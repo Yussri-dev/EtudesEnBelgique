@@ -370,8 +370,102 @@ input:focus {
     font-size: 1.1rem;
 }
 
+/* Group Cards (WhatsApp) */
+.group {
+    background: white;
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    border-left: 4px solid #25D366;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
 
+.group:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
 
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1.2rem;
+}
+
+.group-title {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.group-title i {
+    font-size: 1.8rem;
+    color: #25D366;
+}
+
+.group strong {
+    font-size: 1.3rem;
+    color: #212529;
+    font-weight: 700;
+}
+
+.group-badge {
+    background: #d4f4dd;
+    color: #25D366;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.group-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.2rem 0;
+    padding: 1.2rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.group-description {
+    color: #6c757d;
+    line-height: 1.6;
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.group-footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.group a {
+    color: white;
+    background: #25D366;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background 0.3s;
+    font-size: 0.95rem;
+}
+
+.group a:hover {
+    background: #1da851;
+}
+
+/* Footer */
 footer {
     background: rgba(0, 0, 0, 0.8);
     color: white;
@@ -558,27 +652,26 @@ footer {
 
     .stats {
         grid-template-columns: 1fr;
+        padding: 0 1rem;
     }
 
     .filter-grid {
         grid-template-columns: 1fr;
     }
 
-    .school-info {
+    .school-info,
+    .group-info {
         grid-template-columns: 1fr;
     }
 
-    .school-header {
+    .school-header,
+    .group-header {
         flex-direction: column;
         gap: 1rem;
     }
 
     .container {
         padding: 0 1rem 1rem;
-    }
-
-    .stats {
-        padding: 0 1rem;
     }
 
     .results-header {
