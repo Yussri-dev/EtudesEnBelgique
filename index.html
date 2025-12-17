@@ -16,7 +16,6 @@
             <div class="logo">
                 <img src="Images/9rayti.png" style="width: 40px; height: 32px;" alt="">
                 Mes Etudes En Belgique
-                <br>
             </div>
             <ul class="nav-links">
                 <li><a href="/index.html"><i class="fas fa-home"></i> Accueil</a></li>
@@ -42,12 +41,12 @@
     <div class="stats">
         <div class="stat-card">
             <i class="fas fa-school"></i>
-            <h3 id="totalSchools">3</h3>
+            <h3 id="totalSchools">61</h3>
             <p>Écoles disponibles</p>
         </div>
         <div class="stat-card">
             <i class="fas fa-map-marked-alt"></i>
-            <h3 id="totalRegions">2</h3>
+            <h3 id="totalRegions">3</h3>
             <p>Régions</p>
         </div>
         <div class="stat-card">
@@ -78,7 +77,7 @@
                     </select>
                 </div>
                 <div class="filter-item">
-                    <label for="typeSchool"><i class="fas fa-university"></i> Univ/Haute école</label>
+                    <label for="typeSchool"><i class="fas fa-university"></i> Type d'établissement</label>
                     <select id="typeSchool">
                         <option value="">Tous les types</option>
                         <option value="Université">Université</option>
@@ -107,9 +106,17 @@
                 </div>
 
                 <div class="filter-item">
+                    <label for="filiere"><i class="fas fa-graduation-cap"></i> Filière</label>
+                    <select id="filiere">
+                        <option value="">Toutes les filières</option>
+                    </select>
+                </div>
+
+                <!-- Filtre d'âge minimum commenté pour le moment -->
+                <!-- <div class="filter-item">
                     <label for="age"><i class="fas fa-user"></i> Âge minimum</label>
                     <input type="number" id="age" min="0" placeholder="Ex: 18">
-                </div>
+                </div> -->
 
                 <div class="filter-item">
                     <label for="note"><i class="fas fa-star"></i> Note minimum</label>
@@ -121,7 +128,7 @@
         <div class="results-header">
             <div class="results-count">
                 <i class="fas fa-list"></i>
-                <span id="resultsCount">3 écoles trouvées</span>
+                <span id="resultsCount">61 écoles trouvées</span>
             </div>
         </div>
 
@@ -137,12 +144,9 @@
                         <h3>Mes Etudes En Belgique</h3>
                     </div>
                     <p>Votre plateforme pour trouver l'école idéale en Belgique. Nous vous aidons à comparer et choisir
-                        parmi les meilleures institutions d'enseignement.
-
-                    </p>
-                    <p>Mes études en belgique</p>
+                        parmi les meilleures institutions d'enseignement.</p>
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=100076118005381" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -152,10 +156,9 @@
                 <div class="footer-column">
                     <h4>Navigation</h4>
                     <ul>
-                        <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
-                        <li><a href="#recherche"><i class="fas fa-search"></i> Recherche</a></li>
-                        <li><a href="#ecoles"><i class="fas fa-school"></i> Écoles</a></li>
-                        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li><a href="/index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                        <li><a href="/groupes.html"><i class="fab fa-whatsapp"></i> Groupes</a></li>
+                        <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                     </ul>
                 </div>
 
@@ -191,344 +194,8 @@
         </div>
     </footer>
 
+    <script src="/Assets/schools-data.js"></script>
     <script>
-
-        const schools = [
-
-            /* ===================== */
-            /* ===== WALLONIE ====== */
-            /* ===================== */
-
-            /* Universités */
-            {
-                private: "public",
-                name: "Université catholique de Louvain (UCLouvain)",
-                site: "https://www.uclouvain.be",
-                address: "Louvain-la-Neuve",
-                region: "Wallonie",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-01",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français", "Anglais"],
-                typeSchool: "Université",
-                filieres: ["Informatique", "Sciences", "Médecine", "Droit", "Économie"],
-                equivalence: true,
-                note: 14
-            },
-            {
-                private: "public",
-                name: "Université de Liège",
-                site: "https://www.uliege.be",
-                address: "Liège",
-                region: "Wallonie",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-01",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français", "Anglais"],
-                typeSchool: "Université",
-                filieres: ["Informatique", "Sciences", "Médecine", "Ingénierie"],
-                equivalence: true,
-                note: 14
-            },
-            {
-                private: "public",
-                name: "Université de Mons (UMONS)",
-                site: "https://www.umons.ac.be",
-                address: "Mons",
-                region: "Wallonie",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-01",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français"],
-                typeSchool: "Université",
-                filieres: ["Informatique", "Sciences", "Gestion"],
-                equivalence: true,
-                note: 13
-            },
-            {
-                private: "public",
-                name: "Université de Namur (UNamur)",
-                site: "https://www.unamur.be",
-                address: "Namur",
-                region: "Wallonie",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-01",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français"],
-                typeSchool: "Université",
-                filieres: ["Informatique", "Sciences", "Droit"],
-                equivalence: true,
-                note: 13
-            },
-
-            /* Hautes écoles */
-            {
-                private: "public",
-                name: "Hénallux – Haute École Namur-Liège-Luxembourg",
-                site: "https://www.henallux.be",
-                address: "Namur",
-                region: "Wallonie",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-10",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français"],
-                typeSchool: "Haute école",
-                filieres: ["Informatique", "Gestion", "Marketing"],
-                equivalence: true,
-                note: 12
-            },
-            {
-                private: "public",
-                name: "Haute École de la Province de Liège (HEPL)",
-                site: "https://www.hepl.be",
-                address: "Liège",
-                region: "Wallonie",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-10",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français"],
-                typeSchool: "Haute école",
-                filieres: ["Informatique", "Électronique", "Gestion"],
-                equivalence: true,
-                note: 12
-            },
-            {
-                private: "public",
-                name: "Haute École Condorcet",
-                site: "https://www.condorcet.be",
-                address: "Mons",
-                region: "Wallonie",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-10",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français"],
-                typeSchool: "Haute école",
-                filieres: ["Informatique", "Gestion", "Soins infirmiers"],
-                equivalence: true,
-                note: 12
-            },
-
-            /* Promotion sociale */
-            {
-                private: "public",
-                name: "EAFC – Enseignement pour Adultes",
-                site: "https://www.eafc.be",
-                address: "Wallonie",
-                region: "Wallonie",
-                openDate: "2025-09-01",
-                registrationDate: "2025-08-15",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français"],
-                typeSchool: "Promotion sociale",
-                filieres: ["Informatique", "Comptabilité", "Secrétariat"],
-                equivalence: false,
-                note: 10
-            },
-
-            /* ===================== */
-            /* ===== BRUXELLES ===== */
-            /* ===================== */
-
-            /* Universités */
-            {
-                private: "public",
-                name: "Université libre de Bruxelles (ULB)",
-                site: "https://www.ulb.be",
-                address: "Bruxelles",
-                region: "Bruxelles",
-                openDate: "2025-09-15",
-                registrationDate: "2025-06-01",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français", "Anglais"],
-                typeSchool: "Université",
-                filieres: ["Informatique", "Sciences", "Médecine", "Économie"],
-                equivalence: true,
-                note: 14
-            },
-            {
-                private: "public",
-                name: "Vrije Universiteit Brussel (VUB)",
-                site: "https://www.vub.be",
-                address: "Bruxelles",
-                region: "Bruxelles",
-                openDate: "2025-09-15",
-                registrationDate: "2025-05-15",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Néerlandais", "Anglais"],
-                typeSchool: "Université",
-                filieres: ["Informatica", "Engineering", "Business"],
-                equivalence: true,
-                note: 13
-            },
-
-            /* Hautes écoles */
-            {
-                private: "public",
-                name: "Haute École Léonard de Vinci",
-                site: "https://www.vinci.be",
-                address: "Bruxelles",
-                region: "Bruxelles",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-10",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français"],
-                typeSchool: "Haute école",
-                filieres: ["Informatique", "Réseaux", "Business"],
-                equivalence: true,
-                note: 12
-            },
-            {
-                private: "public",
-                name: "HE2B – Haute École Bruxelles-Brabant",
-                site: "https://www.he2b.be",
-                address: "Bruxelles",
-                region: "Bruxelles",
-                openDate: "2025-09-01",
-                registrationDate: "2025-06-10",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Français"],
-                typeSchool: "Haute école",
-                filieres: ["Informatique", "Éducation", "Paramédical"],
-                equivalence: true,
-                note: 12
-            },
-
-            /* ===================== */
-            /* ===== FLANDRE ======= */
-            /* ===================== */
-
-            /* Universités */
-            {
-                private: "public",
-                name: "KU Leuven",
-                site: "https://www.kuleuven.be",
-                address: "Leuven",
-                region: "Flandre",
-                openDate: "2025-09-15",
-                registrationDate: "2025-05-15",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Néerlandais", "Anglais"],
-                typeSchool: "Université",
-                filieres: ["Engineering", "Sciences", "Business", "Computer Science"],
-                equivalence: true,
-                note: 14
-            },
-            {
-                private: "public",
-                name: "Universiteit Gent (UGent)",
-                site: "https://www.ugent.be",
-                address: "Gent",
-                region: "Flandre",
-                openDate: "2025-09-15",
-                registrationDate: "2025-05-15",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Néerlandais", "Anglais"],
-                typeSchool: "Université",
-                filieres: ["Engineering", "Informatica", "Sciences"],
-                equivalence: true,
-                note: 14
-            },
-            {
-                private: "public",
-                name: "Universiteit Antwerpen",
-                site: "https://www.uantwerpen.be",
-                address: "Antwerpen",
-                region: "Flandre",
-                openDate: "2025-09-15",
-                registrationDate: "2025-05-15",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Néerlandais", "Anglais"],
-                typeSchool: "Université",
-                filieres: ["Business", "Informatica", "Sciences"],
-                equivalence: true,
-                note: 13
-            },
-            {
-                private: "public",
-                name: "Hasselt University (UHasselt)",
-                site: "https://www.uhasselt.be",
-                address: "Hasselt",
-                region: "Flandre",
-                openDate: "2025-09-15",
-                registrationDate: "2025-05-15",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Néerlandais", "Anglais"],
-                typeSchool: "Université",
-                filieres: ["Informatica", "Engineering", "Business"],
-                equivalence: true,
-                note: 13
-            },
-
-            /* Hautes écoles */
-            {
-                private: "public",
-                name: "Thomas More Hogeschool",
-                site: "https://www.thomasmore.be",
-                address: "Mechelen",
-                region: "Flandre",
-                openDate: "2025-09-15",
-                registrationDate: "2025-05-15",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Néerlandais"],
-                typeSchool: "Haute école",
-                filieres: ["Informatica", "Business", "Multimedia"],
-                equivalence: true,
-                note: 11
-            },
-            {
-                private: "public",
-                name: "Arteveldehogeschool",
-                site: "https://www.arteveldehogeschool.be",
-                address: "Gent",
-                region: "Flandre",
-                openDate: "2025-09-15",
-                registrationDate: "2025-05-15",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Néerlandais"],
-                typeSchool: "Haute école",
-                filieres: ["Informatica", "Communicatie", "Design"],
-                equivalence: true,
-                note: 11
-            },
-
-            /* Promotion sociale */
-            {
-                private: "public",
-                name: "CVO – Centrum voor Volwassenenonderwijs",
-                site: "https://www.vlaanderen.be/cvo",
-                address: "Flandre",
-                region: "Flandre",
-                openDate: "2025-09-01",
-                registrationDate: "2025-08-01",
-                closeDate: "2026-06-30",
-                minAge: 18,
-                languages: ["Néerlandais"],
-                typeSchool: "Promotion sociale",
-                filieres: ["Informatica", "Administratie", "Techniek"],
-                equivalence: false,
-                note: 10
-            }
-
-        ];
-
         // Calculate statistics
         const totalSchools = schools.length;
         const uniqueRegions = [...new Set(schools.map(s => s.region))].length;
@@ -541,11 +208,21 @@
         document.getElementById('totalLanguages').textContent = uniqueLanguages;
         document.getElementById('totalFilieres').textContent = uniqueFilieres;
 
+        // Populate filières dropdown
+        const filiereEl = document.getElementById("filiere");
+        const allFilieres = [...new Set(schools.flatMap(s => s.filieres))].sort();
+        allFilieres.forEach(filiere => {
+            const option = document.createElement("option");
+            option.value = filiere;
+            option.textContent = filiere;
+            filiereEl.appendChild(option);
+        });
+
         const typeSchoolEl = document.getElementById("typeSchool");
-        const privateEl = document.getElementById("private")
+        const privateEl = document.getElementById("private");
         const regionEl = document.getElementById("region");
         const languageEl = document.getElementById("language");
-        const ageEl = document.getElementById("age");
+        // const ageEl = document.getElementById("age"); // Commenté pour le moment
         const noteEl = document.getElementById("note");
         const resultsEl = document.getElementById("results");
         const resultsCountEl = document.getElementById("resultsCount");
@@ -571,6 +248,7 @@
             if (typeSchoolEl.value) {
                 filtered = filtered.filter(s => s.typeSchool === typeSchoolEl.value);
             }
+            
             if (privateEl.value) {
                 filtered = filtered.filter(s => s.private === privateEl.value);
             }
@@ -583,9 +261,14 @@
                 filtered = filtered.filter(s => s.languages.includes(languageEl.value));
             }
 
-            if (ageEl.value) {
-                filtered = filtered.filter(s => s.minAge <= Number(ageEl.value));
+            if (filiereEl.value) {
+                filtered = filtered.filter(s => s.filieres.includes(filiereEl.value));
             }
+
+            // Filtre d'âge commenté pour le moment
+            // if (ageEl.value) {
+            //     filtered = filtered.filter(s => s.minAge <= Number(ageEl.value));
+            // }
 
             if (noteEl.value) {
                 filtered = filtered.filter(s => {
@@ -608,11 +291,11 @@
 
             if (list.length === 0) {
                 resultsEl.innerHTML = `
-            <div class="no-results">
-                <i class="fas fa-search"></i>
-                <p>Aucune école ne correspond à vos critères</p>
-            </div>
-        `;
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>Aucune école ne correspond à vos critères</p>
+                    </div>
+                `;
                 return;
             }
 
@@ -620,58 +303,61 @@
                 const div = document.createElement("div");
                 div.className = "school";
                 div.innerHTML = `
-            <div class="school-header">
-                <div class="school-title">
-                    <i class="fas fa-university"></i>
-                    <strong>${s.name}</strong>
-                </div>
-                <div class="school-badge">${s.typeSchool}</div>
-            </div>
-            <div class="school-info">
-                <div class="info-item">
-                    <i class="fas fa-building"></i>
-                    <span><strong>Public/privé:</strong> ${s.private === 'public' ? 'Public' : 'Privé'}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span><strong>Région:</strong> ${s.region}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-language"></i>
-                    <span><strong>Langues:</strong> ${s.languages.join(", ")}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-book"></i>
-                    <span><strong>Filières:</strong> ${s.filieres.join(", ")}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-user-clock"></i>
-                    <span><strong>Âge min:</strong> ${s.minAge} ans</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-star"></i>
-                    <span><strong>Note:</strong> ${s.note !== null ? s.note + '/20' : 'Non requise'}</span>
-                </div>
-                <div class="info-item">
-                    <i class="fas fa-${s.equivalence ? 'check-circle' : 'times-circle'}"></i>
-                    <span><strong>Équivalence:</strong> ${s.equivalence ? "Oui" : "Non"}</span>
-                </div>
-            </div>
-            <div class="school-footer">
-                ${s.site ? `<a href="${s.site}" target="_blank"><i class="fas fa-external-link-alt"></i> Visiter le site</a>` : ''}
-            </div>
-        `;
+                    <div class="school-header">
+                        <div class="school-title">
+                            <i class="fas fa-university"></i>
+                            <strong>${s.name}</strong>
+                        </div>
+                        <div class="school-badge">${s.typeSchool}</div>
+                    </div>
+                    <div class="school-info">
+                        <div class="info-item">
+                            <i class="fas fa-building"></i>
+                            <span><strong>Public/privé:</strong> ${s.private === 'public' ? 'Public' : 'Privé'}</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span><strong>Région:</strong> ${s.region}</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-language"></i>
+                            <span><strong>Langues:</strong> ${s.languages.join(", ")}</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-book"></i>
+                            <span><strong>Filières:</strong> ${s.filieres.slice(0, 3).join(", ")}${s.filieres.length > 3 ? '...' : ''}</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-user-clock"></i>
+                            <span><strong>Âge min:</strong> ${s.minAge} ans</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-star"></i>
+                            <span><strong>Note:</strong> ${s.note !== null ? s.note + '/20' : 'Non requise'}</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-${s.equivalence ? 'check-circle' : 'times-circle'}"></i>
+                            <span><strong>Équivalence:</strong> ${s.equivalence ? "Oui" : "Non"}</span>
+                        </div>
+                    </div>
+                    <div class="school-footer">
+                        ${s.site ? `<a href="${s.site}" target="_blank"><i class="fas fa-external-link-alt"></i> Visiter le site</a>` : ''}
+                    </div>
+                `;
                 resultsEl.appendChild(div);
             });
         }
 
+        // Event listeners
         privateEl.addEventListener("change", filterSchools);
         typeSchoolEl.addEventListener("change", filterSchools);
         regionEl.addEventListener("change", filterSchools);
-        languageEl.addEventListener("input", filterSchools);
-        ageEl.addEventListener("input", filterSchools);
+        languageEl.addEventListener("change", filterSchools);
+        filiereEl.addEventListener("change", filterSchools);
+        // ageEl.addEventListener("input", filterSchools); // Commenté pour le moment
         noteEl.addEventListener("input", filterSchools);
 
+        // Initial render
         filterSchools();
     </script>
 </body>

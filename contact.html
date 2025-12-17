@@ -15,7 +15,7 @@
         <div class="nav-container">
             <div class="logo">
                 <img src="Images/9rayti.png" style="width: 40px; height: 32px;" alt="">
-                MEEb Finder
+                Mes Etudes En Belgique
             </div>
             <ul class="nav-links">
                 <li><a href="/index.html"><i class="fas fa-home"></i> Accueil</a></li>
@@ -121,7 +121,7 @@
         <div class="social-section">
             <h2>Suivez-nous sur les réseaux sociaux</h2>
             <div class="social-links">
-                <a href="#" class="social-link" aria-label="Facebook">
+                <a href="https://www.facebook.com/profile.php?id=100076118005381" class="social-link" aria-label="Facebook">
                     <i class="fab fa-facebook-f"></i>
                 </a>
                 <a href="#" class="social-link" aria-label="Instagram">
@@ -166,7 +166,6 @@
                     <h4>Navigation</h4>
                     <ul>
                         <li><a href="/index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                        <li><a href="/index.html"><i class="fas fa-search"></i> Recherche</a></li>
                         <li><a href="/groupes.html"><i class="fab fa-whatsapp"></i> Groupes</a></li>
                         <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                     </ul>
@@ -206,12 +205,12 @@
 
     <!-- EmailJS SDK -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    
+
     <script>
         // Initialize EmailJS with your public key
         // IMPORTANT: Sign up at https://www.emailjs.com/ and replace with your keys
         // This is a demo key - replace with your actual EmailJS credentials
-        (function(){
+        (function () {
             emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
         })();
 
@@ -236,24 +235,24 @@
 
         contactForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            
+
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
-            
+
             const mailtoLink = `mailto:mesetudesenbelgique@edufind.be?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
-            
+
             window.location.href = mailtoLink;
-            
+
             successMessage.classList.add("show");
             contactForm.reset();
-            
+
             setTimeout(() => {
                 successMessage.classList.remove("show");
             }, 5000);
         });
-        
+
     </script>
 </body>
 
