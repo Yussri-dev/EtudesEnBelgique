@@ -11,22 +11,7 @@
 
 <body>
     <nav>
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-graduation-cap"></i>
-                Mes Etudes En Belgique
-            </div>
-            <ul class="nav-links">
-                <li><a href="/index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="/groupes.html"><i class="fab fa-whatsapp"></i> Groupes</a></li>
-                <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-            </ul>
-            <div class="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+        <div id="navbar"></div>
     </nav>
 
     <div class="banner">
@@ -40,7 +25,7 @@
     <div class="stats">
         <div class="stat-card">
             <i class="fab fa-whatsapp"></i>
-            <h3 id="totalGroups">3</h3>
+            <h3 id="totalGroups"></h3>
             <p>Groupes actifs</p>
         </div>
         <div class="stat-card">
@@ -69,98 +54,18 @@
         </div>
 
         <div id="results"></div>
+        <div id="reseaux"></div>
     </div>
 
     <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <div class="footer-logo">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h3>Mes Etudes En Belgique</h3>
-                    </div>
-                    <p>Votre plateforme pour trouver l'école idéale en Belgique et rejoindre une communauté d'étudiants.
-                    </p>
-                    <p>Mes études en belgique</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=100076118005381" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.tiktok.com/@worldetudes" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://www.linkedin.com/in/mes-etudes-en-belgique/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="/index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                        <li><a href="/groupes.html"><i class="fab fa-whatsapp"></i> Groupes</a></li>
-                        <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Régions</h4>
-                    <ul>
-                        <li><a href="#wallonie"><i class="fas fa-map-marker-alt"></i> Wallonie</a></li>
-                        <li><a href="#bruxelles"><i class="fas fa-map-marker-alt"></i> Bruxelles</a></li>
-                        <li><a href="#flandre"><i class="fas fa-map-marker-alt"></i> Flandre</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Contact</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> mesetudesenbelgique@edufind.be</li>
-                        <li><i class="fas fa-phone"></i> +32 466 29 49 40</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Kortrijk, Belgique</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 Mes Etudes En Belgique. Tous droits réservés.</p>
-                <div class="footer-links">
-                    <a href="#privacy">Politique de confidentialité</a>
-                    <span>|</span>
-                    <a href="#terms">Conditions d'utilisation</a>
-                    <span>|</span>
-                    <a href="#cookies">Cookies</a>
-                </div>
-            </div>
-        </div>
+        <div id="footer"></div>
     </footer>
 
+    <script src="/scripts/navbar.js"></script>
+    <script src="/scripts/reseaux.js"></script>
+    <script src="/Assets/groups-data.js"></script>
+    <script src="/scripts/footer.js"></script>
     <script>
-        const whatsappGroups = [
-            {
-                name: "Études en Flandre - Informations",
-                region: "Flandre",
-                typeSchool: "Toutes",
-                filiere: "Général",
-                members: 150,
-                description: "Groupe d'information pour les étudiants souhaitant étudier en Flandre. Ressources, conseils et accompagnement pour les démarches administratives.",
-                link: "https://chat.whatsapp.com/HseX4DVCzl82PUqig7mUfF"
-            },
-            {
-                name: "Étudiants Internationaux - Belgique",
-                region: "Belgique",
-                typeSchool: "Toutes",
-                filiere: "Général",
-                members: 200,
-                description: "Communauté d'étudiants internationaux en Belgique. Partage d'expériences, conseils pratiques pour le logement, les démarches administratives et l'intégration.",
-                link: "https://chat.whatsapp.com/FM7tjBDwpYqBJLd6I8Tm0m"
-            },
-            {
-                name: "Mes Études en Belgique - Support",
-                region: "Belgique",
-                typeSchool: "Toutes",
-                filiere: "Général",
-                members: 180,
-                description: "Groupe officiel de support pour tous les étudiants. Questions, réponses et entraide pour réussir vos études en Belgique. Disponible 24/7.",
-                link: "https://chat.whatsapp.com/FmzVBKetpnv5ww2tpFv6sf"
-            }
-        ];
 
         const totalGroups = whatsappGroups.length;
         document.getElementById('totalGroups').textContent = totalGroups;
@@ -190,28 +95,28 @@
                 const div = document.createElement("div");
                 div.className = "group";
                 div.innerHTML = `
-            <div class="group-header">
-                <div class="group-title">
-                    <i class="fab fa-whatsapp"></i>
-                    <strong>${g.name}</strong>
-                </div>
-                <div>
-                    <span class="group-badge">${g.members} membres</span>
-                    <span class="group-badge">${g.region}</span>
-                </div>
-            </div>
-            <div class="group-info">
-                <div class="info-item">
-                    <i class="fas fa-bullseye"></i>
-                    <span><strong>But:</strong> ${g.description}</span>
-                </div>
-            </div>
-            <div class="group-footer">
-                <a href="${g.link}" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Rejoindre le groupe
-                </a>
-            </div>
-        `;
+                    <div class="group-header">
+                        <div class="group-title">
+                            <i class="fab fa-whatsapp"></i>
+                            <strong>${g.name}</strong>
+                        </div>
+                        <div>
+                            <span class="group-badge">${g.members} membres</span>
+                            <span class="group-badge">${g.region}</span>
+                        </div>
+                    </div>
+                    <div class="group-info">
+                        <div class="info-item">
+                            <i class="fas fa-bullseye"></i>
+                            <span><strong>But:</strong> ${g.description}</span>
+                        </div>
+                    </div>
+                    <div class="group-footer">
+                        <a href="${g.link}" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Rejoindre le groupe
+                        </a>
+                    </div>
+                `;
                 resultsEl.appendChild(div);
             });
         }

@@ -10,24 +10,8 @@
 </head>
 
 <body>
-
     <nav>
-        <div class="nav-container">
-            <div class="logo">
-                <img src="Images/9rayti.png" style="width: 40px; height: 32px;" alt="">
-                Mes Etudes En Belgique
-            </div>
-            <ul class="nav-links">
-                <li><a href="/index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="/groupes.html"><i class="fab fa-whatsapp"></i> Groupes</a></li>
-                <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-            </ul>
-            <div class="burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+        <div id="navbar"></div>
     </nav>
 
     <div class="banner">
@@ -133,68 +117,18 @@
         </div>
 
         <div id="results"></div>
+        <div id="reseaux"></div>
+
     </div>
 
     <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <div class="footer-logo">
-                        <i class="fas fa-graduation-cap"></i>
-                        <h3>Mes Etudes En Belgique</h3>
-                    </div>
-                    <p>Votre plateforme pour trouver l'école idéale en Belgique. Nous vous aidons à comparer et choisir
-                        parmi les meilleures institutions d'enseignement.</p>
-                    <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=100076118005381" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Navigation</h4>
-                    <ul>
-                        <li><a href="/index.html"><i class="fas fa-home"></i> Accueil</a></li>
-                        <li><a href="/groupes.html"><i class="fab fa-whatsapp"></i> Groupes</a></li>
-                        <li><a href="/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Régions</h4>
-                    <ul>
-                        <li><a href="#wallonie"><i class="fas fa-map-marker-alt"></i> Wallonie</a></li>
-                        <li><a href="#bruxelles"><i class="fas fa-map-marker-alt"></i> Bruxelles</a></li>
-                        <li><a href="#flandre"><i class="fas fa-map-marker-alt"></i> Flandre</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-column">
-                    <h4>Contact</h4>
-                    <ul class="contact-info">
-                        <li><i class="fas fa-envelope"></i> mesetudesenbelgique@edufind.be</li>
-                        <li><i class="fas fa-phone"></i> +32 466 29 49 40</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Kortrijk, Belgique</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2025 Mes Etudes En Belgique. Tous droits réservés.</p>
-                <div class="footer-links">
-                    <a href="#privacy">Politique de confidentialité</a>
-                    <span>|</span>
-                    <a href="#terms">Conditions d'utilisation</a>
-                    <span>|</span>
-                    <a href="#cookies">Cookies</a>
-                </div>
-            </div>
-        </div>
+        <div id="footer"></div>
     </footer>
 
+    <script src="/scripts/navbar.js"></script>
+    <script src="/scripts/reseaux.js"></script>
     <script src="/Assets/schools-data.js"></script>
+    <script src="/scripts/footer.js"></script>
     <script>
         // Calculate statistics
         const totalSchools = schools.length;
@@ -208,6 +142,7 @@
         document.getElementById('totalLanguages').textContent = uniqueLanguages;
         document.getElementById('totalFilieres').textContent = uniqueFilieres;
 
+        
         // Populate filières dropdown
         const filiereEl = document.getElementById("filiere");
         const allFilieres = [...new Set(schools.flatMap(s => s.filieres))].sort();
@@ -248,7 +183,7 @@
             if (typeSchoolEl.value) {
                 filtered = filtered.filter(s => s.typeSchool === typeSchoolEl.value);
             }
-            
+
             if (privateEl.value) {
                 filtered = filtered.filter(s => s.private === privateEl.value);
             }

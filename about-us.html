@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Mes Etudes En Belgique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/Styles/style.css">
+    <style>
+        /* Additional styles for About page only */
+        .about-intro {
+            background: white;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            border-left: 4px solid #2E4F9E;
+        }
+
+        .about-intro h2 {
+            color: #2E4F9E;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.8rem;
+        }
+
+        .about-intro h2 i {
+            color: #E63946;
+            font-size: 2rem;
+        }
+
+        .about-intro p {
+            color: #495057;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .mission-card,
+        .vision-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .mission-card {
+            border-left: 4px solid #E63946;
+        }
+
+        .vision-card {
+            border-left: 4px solid #2E4F9E;
+        }
+
+        .mission-card:hover,
+        .vision-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(46, 79, 158, 0.15);
+        }
+
+        .mission-card h3,
+        .vision-card h3 {
+            color: #2E4F9E;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .mission-card h3 i {
+            color: #E63946;
+            font-size: 1.8rem;
+        }
+
+        .vision-card h3 i {
+            color: #2E4F9E;
+            font-size: 1.8rem;
+        }
+
+        .mission-card p,
+        .vision-card p {
+            color: #6c757d;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .values-section {
+            background: white;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            border-top: 4px solid #E63946;
+        }
+
+        .values-section h2 {
+            color: #2E4F9E;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .value-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .value-item:hover {
+            transform: translateY(-5px);
+            background: linear-gradient(135deg, rgba(46, 79, 158, 0.05) 0%, rgba(230, 57, 70, 0.05) 100%);
+        }
+
+        .value-item i {
+            font-size: 2.5rem;
+            color: #E63946;
+            margin-bottom: 1rem;
+        }
+
+        .value-item h4 {
+            color: #2E4F9E;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .value-item p {
+            color: #6c757d;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #2E4F9E 0%, #4A6CB8 100%);
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+        }
+
+        .stat-item i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .stat-item p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            background: white;
+            padding: 3rem;
+            text-align: center;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            border-top: 4px solid #E63946;
+            margin-bottom: 2rem;
+        }
+
+        .cta-section h2 {
+            color: #2E4F9E;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .cta-section p {
+            color: #6c757d;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: 0.9rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #E63946 0%, #D62839 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #D62839 0%, #C71F2F 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(230, 57, 70, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #2E4F9E;
+            border: 2px solid #2E4F9E;
+        }
+
+        .btn-secondary:hover {
+            background: #2E4F9E;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(46, 79, 158, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .mission-vision-grid,
+            .values-grid,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div id="navbar"></div>
+    </nav>
+
+    <div class="banner">
+        <div class="banner-icon">
+            <i class="fas fa-info-circle"></i>
+        </div>
+        <h1>À Propos de Nous</h1>
+        <p>Découvrez notre histoire, notre mission et nos valeurs</p>
+    </div>
+
+    <div class="container">
+        <!-- About Introduction -->
+        <div class="about-intro">
+            <h2><i class="fas fa-book-open"></i> Qui Sommes-Nous ?</h2>
+            <p>
+                <strong>Mes Etudes En Belgique</strong> est une plateforme dédiée à accompagner les étudiants
+                internationaux dans leur parcours d'études en Belgique. Nous comprenons que choisir une école et
+                s'installer dans un nouveau pays peut être un défi, c'est pourquoi nous avons créé cette ressource
+                complète pour simplifier votre recherche.
+            </p>
+            <p>
+                Fondée par des passionnés de l'éducation et des anciens étudiants internationaux, notre plateforme
+                rassemble des informations détaillées sur les meilleures institutions d'enseignement en Belgique, des
+                conseils pratiques pour l'inscription, et une communauté active d'étudiants prêts à vous aider.
+            </p>
+            <p>
+                Notre objectif est de rendre l'accès à l'éducation belge plus transparent, accessible et convivial pour
+                tous les étudiants, quelle que soit leur origine.
+            </p>
+        </div>
+
+        <!-- Mission & Vision -->
+        <!-- <div class="mission-vision-grid">
+            <div class="mission-card">
+                <h3><i class="fas fa-bullseye"></i> Notre Mission</h3>
+                <p>
+                    Faciliter l'accès à l'enseignement supérieur en Belgique en fournissant des informations fiables,
+                    des outils de recherche avancés et une communauté d'entraide. Nous nous engageons à accompagner
+                    chaque étudiant dans la réalisation de ses ambitions académiques.
+                </p>
+            </div>
+            <div class="vision-card">
+                <h3><i class="fas fa-eye"></i> Notre Vision</h3>
+                <p>
+                    Devenir la référence incontournable pour les étudiants internationaux souhaitant poursuivre leurs
+                    études en Belgique. Nous aspirons à créer un écosystème où l'information, le soutien et les
+                    opportunités sont accessibles à tous.
+                </p>
+            </div>
+        </div> -->
+
+        <!-- Values -->
+        <div class="values-section">
+            <h2>Nos Valeurs</h2>
+            <div class="values-grid">
+                <div class="value-item">
+                    <i class="fas fa-heart"></i>
+                    <h4>Passion</h4>
+                    <p>Nous sommes passionnés par l'éducation et dévoués à aider les étudiants à réussir.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>Fiabilité</h4>
+                    <p>Nous fournissons des informations vérifiées et à jour sur toutes les institutions.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-users"></i>
+                    <h4>Communauté</h4>
+                    <p>Nous créons des liens entre étudiants pour un soutien mutuel et des échanges enrichissants.</p>
+                </div>
+                <div class="value-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <h4>Innovation</h4>
+                    <p>Nous utilisons la technologie pour améliorer constamment l'expérience utilisateur.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <!-- <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <i class="fas fa-school"></i>
+                    <h3>150+</h3>
+                    <p>Écoles Partenaires</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-users"></i>
+                    <h3>5000+</h3>
+                    <p>Étudiants Accompagnés</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-globe"></i>
+                    <h3>50+</h3>
+                    <p>Pays Représentés</p>
+                </div>
+            </div>
+        </div> -->
+
+        <!-- CTA Section -->
+        <!-- <div class="cta-section">
+            <h2>Prêt à Commencer Votre Aventure ?</h2>
+            <p>Rejoignez des milliers d'étudiants qui ont trouvé leur école idéale grâce à notre plateforme</p>
+            <div class="cta-buttons">
+                <a href="ecoles.html" class="btn-primary">
+                    <i class="fas fa-search"></i> Trouver Mon École
+                </a>
+                <a href="contact.html" class="btn-secondary">
+                    <i class="fas fa-envelope"></i> Nous Contacter
+                </a>
+            </div>
+        </div> -->
+
+        <div id="reseaux"></div>
+    </div>
+
+    <footer>
+        <div id="footer"></div>
+    </footer>
+
+    <script src="scripts/navbar.js"></script>
+    <script src="scripts/reseaux.js"></script>
+    <script src="scripts/footer.js"></script>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="scripts/mailing.js"></script>
+</body>
+
+</html>
